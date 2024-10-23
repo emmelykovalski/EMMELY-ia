@@ -1,80 +1,115 @@
-const caixaPrincipal = document.querySelector(".caixa-Principal");
-const caixaPerguntas = document.querySelector(".caixa-Perguntas");
-const caixaAlternativa = document.querySelector(".caixa-Alternativas");
-const caixaResultados= document.querySelector(".caixa-Resultados");
-const textoResultados = document.querySelector(".texto-Resultados");
+const caixaPrincipal = document.querySelector(".caixa-principal");
+const caixaPerguntas = document.querySelector(".caixa-pergunta");
+const caixaAlternativas = document.querySelector(".caixa-alternativas");
+const caixaResultados = document.querySelector(".caixa-resultados");
+const textoResultados = document.querySelector(".texto-resultados");
+
+const perguntas = [
+    {
+        enunciado: "Qual é o nome da galaxia em que o planeta terra orbita?",
+        alternativas: [
+            {
+                texto:"andromeda!",
+                afirmacao:"afirmação"
+            },
+            {
+                texto:"via lactea!",
+                afirmacao:"afirmação."
+                
+
+            }
+        
+        ]
+
+    },
+    {
+        enunciado: "Quantas constelações orbitam sobre a galaxia do planeta terra?",
+        alternativas: [
+            {
+                texto:"52.",
+                afirmacao:"afirmação"
+            },
+            {
+                texto:"88.",
+                afirmacao:"afirmação."
+                
+
+            }
+        
+        ]
+
+    },
+    {
+        enunciado: "Como tudo se iniciou?.",
+        alternativas: [
+            {
+                texto:"Atavez de um atomo.",
+                afirmacao:"afirmação"
+            },
+            {
+                texto:"Atravez e poeira estelares.",
+                afirmacao:"afirmação."
+                
+
+            }
+        
+    
+        ]
 
 
-const Perguntas = [
-{
-    enunciado :"Assim que saiu da escola Gabriel se depara com uma nova tecnologia, um chat que consegue responder todas as dúvidas que uma pessoa pode ter, o chat também gera imagens e áudios hiper-realistas. Qual o primeiro pensamento de Gabriel?",
- 
+    },
+    { 
+        enunciado: "Qual e a galaxia mai proxima e nós?.",
+        alternativas: [
+            {
+                texto:"Andromeda.",
+                afirmacao:"afirmação"
+            },
+            {
+                texto:"Galaxia do triangulo.",
+                afirmacao:"afirmação."
+                
 
-    alternativas: [
-        "isso é assustador!",
-        "isso é maravilhoso!",
-    ]
-
-
-
-
-},
-
-{
-    enunciado: "Com a descoberta desta tecnologia uma professora de tecnologia da escola decidiu fazer uma sequência de aulas sobre IA. No fim de uma aula ela pede que Gabriel escreva um trabalho sobre o uso de tecnologia em sala de aula. Qual atitude Gabriel toma?",
-
-alternativas : [
-"Utiliza uma ferramenta de busca na internet que utiliza IA para que ela ajude a encontrar informações relevantes para o trabalho e explique numa linguagem que facilite o entendimento.",
-"Escreve o trabalho com base nas conversas que teve com colegas, algumas pesquisas na internet e conhecimentos próprios sobre o tema."
-
-]
-
-
-},
-
-{
-    enunciado: "quastas constelações existem na via láctea?",
-
-    alternativas: [
-        "45 constelações",
-    "67 constelações.",
-    "81 constelações."
-]
-
-},
-
-
-
-{
-    enunciado: "Como é chamada a galaxia em que o planeta terra está localizado?",
-
-    alternativas:[
-    "Via láctea.",
-     "Andromeda."
-
-    ]
-}
-
+            }
+        
+    
+        ]
+    }
 
 ];
 
 let atual = 0;
 let perguntaAtual;
+let historiaFinal = "";
 
 function mostraPergunta() {
-perguntaAtual = Perguntas[atual];
-caixaPerguntas.textContent = perguntaAtual.enunciado;
-mostraAlternativas();
+    if(atual >= perguntas.length){
+        mostraResultado();
+        return
+    }
+    perguntaAtual = perguntas[atual];
+    caixaPerguntas.textContent = perguntaAtual.enunciado;
+    caixaAlternativas.textContent = "";
+    mostraAlternativas();
 }
 
-function mostraAlternativas() {
-for(const alternativas of perguntaAtual.alternativas){
-const botaoAlternativas = document.createElement("button");
-botaoAlternativas.textContent = alternativas;
-botaoAlternativas.appendChild(botaoAlternativas);
+function mostraAlternativas(){
+    for(const alternativa of perguntaAtual.alternativas){
+        const botaoAlternativas = document.createElement("button");
+        botaoAlternativas.textContent = alternativa.texto;
+        botaoAlternativas.addEventListener("click",() => respostaSelecionada(alternativa));
+        caixaAlternativas.appendChild(botaoAlternativas);
+    }
 }
 
-}
-
+function respostaSelecionada(opcaoSelecionada){
+           atual++;
+           mostraPergunta();
+           const afirmacoes = opcaoSelecionada
+        }
+ function mostraResultado(){
+    caixaPerguntas.textContent = "A teoria mais aceita atualmente é que ele teve início com o Big Bang um atomo super quente e energizao q explodio assim dando inicio a tudo";
+    textoResultados.textContent = historiaFinal += afirmacoes + " ";
+    caixaAlternativas.textContent = "";
+ }       
 mostraPergunta();
-
